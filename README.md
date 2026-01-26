@@ -39,3 +39,8 @@ It focuses on ideation, system design, and real-world use cases rather than buil
 ## Vision for Bharat
 
 By enabling people to communicate clearly across languages in everyday market interactions, MandiSaathi supports more inclusive, transparent, and fair local trade — contributing to the vision of a **Viksit Bharat**.
+
+<img width="603" height="858" alt="Screenshot 2026-01-26 183227" src="https://github.com/user-attachments/assets/b7e1b2e9-b457-49bb-bf77-333d52d5ae6f" />
+<img width="602" height="828" alt="Screenshot 2026-01-26 183250" src="https://github.com/user-attachments/assets/5b2e070b-6b75-4f46-a10f-d95e72081056" />
+<img width="557" height="618" alt="Screenshot 2026-01-26 183300" src="https://github.com/user-attachments/assets/4cd631ee-2c4e-4f67-a1e2-fb2ce886dca1" />
+
