@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MandiSaathi 🇮🇳</title>
+
+  <style>
+    :root {
+      --saffron: #ff9933;
+      --green: #138808;
+      --chakra: #0a3d91;
+      --card: #ffffff;
+      --text: #1f1f1f;
+      --muted: #6b6b6b;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom, #ffffff, #f0fff4);
+      color: var(--text);
+    }
+
+    header {
+      padding: 24px;
+      text-align: center;
+      border-bottom: 4px solid var(--saffron);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: var(--chakra);
+    }
+
+    header p {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: linear-gradient(to right, var(--saffron), white, var(--green));
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 420px;
+      margin: 30px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      color: var(--chakra);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 10px;
+      cursor: default;
+    }
+
+    .btn.voice { background: var(--chakra); color: white; }
+    .btn.mandi { background: var(--green); color: white; }
+
+    .lang-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 8px 0 12px;
+    }
+
+    .lang {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      border: 1px solid #ccc;
+      background: #f5f5f5;
+    }
+
+    .lang.hi { background:#fff3e0; border-color:var(--saffron); }
+    .lang.ta { background:#e8f1ff; border-color:var(--chakra); }
+
+    .chat {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .bubble {
+      padding: 12px 14px;
+      border-radius: 14px;
+      max-width: 85%;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .vendor {
+      background: #fff5e6;
+      align-self: flex-start;
+      border-left: 4px solid var(--saffron);
+    }
+
+    .buyer {
+      background: #e8f1ff;
+      align-self: flex-end;
+      border-right: 4px solid var(--chakra);
+    }
+
+    .ai-translation {
+      font-size: 0.85rem;
+      color: #2e7d32;
+      margin-top: 6px;
+      font-style: italic;
+    }
+
+    .mic {
+      width: 70px;
+      height: 70px;
+      margin: 10px auto;
+      border-radius: 50%;
+      background: var(--chakra);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      animation: pulse 1.6s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(10,61,145,0.6); }
+      70% { box-shadow: 0 0 0 18px rgba(10,61,145,0); }
+      100% { box-shadow: 0 0 0 0 rgba(10,61,145,0); }
+    }
+
+    .price {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      margin-top: 6px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>MandiSaathi 🇮🇳</h1>
+  <p>Voice-First Multilingual Assistant for Local Mandis</p>
+  <div class="badge">AI for Bharat • Republic Day 2026</div>
+</header>
+
+<main>
+
+  <!-- Screen 1 -->
+  <div class="card">
+    <h2>Start Conversation</h2>
+    <p>Select your language and speak naturally.</p>
+
+    <div class="lang-row">
+      <div class="lang hi">Hindi</div>
+      <div class="lang ta">Tamil</div>
+      <div class="lang">+ More</div>
+    </div>
+
+    <button class="btn voice">🎙️ Speak Now</button>
+    <button class="btn mandi">📍 Find Nearby Mandi</button>
+  </div>
+
+  <!-- Screen 2 -->
+  <div class="card">
+    <h2>Live Voice Translation</h2>
+
+    <div class="mic">🎙️</div>
+    <p style="text-align:center; font-style:italic; color:#555;">
+      Listening & translating in real time…
+    </p>
+
+    <!-- Vendor Language -->
+    <p><strong>Vendor Language</strong></p>
+    <div class="lang-row">
+      <div class="lang hi">Hindi</div>
+      <div class="lang">+ More</div>
+    </div>
+
+    <!-- Buyer Language -->
+    <p><strong>Buyer Language</strong></p>
+    <div class="lang-row">
+      <div class="lang ta">Tamil</div>
+      <div class="lang">+ More</div>
+    </div>
+
+    <div class="chat">
+
+      <div class="bubble vendor">
+        🧑‍🌾 <strong>Vendor:</strong><br/>
+        “आज टमाटर का भाव क्या है?”
+        <div class="ai-translation">
+          🤖 AI Translation: What is the price of tomatoes today?
+        </div>
+      </div>
+
+      <div class="bubble buyer">
+        🧑‍💼 <strong>Buyer:</strong><br/>
+        “இன்றைய தக்காளி விலை என்ன?”
+        <div class="ai-translation">
+          🤖 AI Translation: What is today’s price of tomatoes?
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Screen 3 -->
+  <div class="card">
+    <h2>Ask for Local Price</h2>
+
+    <label><strong>What price do you want to know?</strong></label>
+    <input type="text" value="Tomatoes" disabled />
+
+    <p style="margin-top:14px; font-style:italic; color:#555;">
+      🤖 AI Response based on nearby mandi data
+    </p>
+
+    <p class="price">₹45 – ₹50 / kg</p>
+    <p>
+      Prices are slightly higher today due to increased demand and lower arrivals in nearby mandis.
+    </p>
+
+    <hr/>
+
+    <p><strong>Nearby Mandi:</strong> Pune APMC</p>
+    <p>⏰ Open: 6:00 AM – 2:00 PM</p>
+    <p>🔥 Peak Hours: 8:00 AM – 11:00 AM</p>
+  </div>
+
+</main>
+
+<footer>
+  Frontend-only UI mockup • Conceptual visualization
+</footer>
+
+</body>
+</html>
