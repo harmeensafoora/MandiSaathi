@@ -42,51 +42,6 @@ MandiSaathi is a revolutionary AI-powered platform that transforms communication
 - **Vendors**: Market sellers wanting to reach customers across language barriers
 - **Market Visitors**: Anyone navigating Indian agricultural markets with language challenges
 
-## 🌟 AI Technology Stack
-
-### Machine Learning Models
-- **Translation**: Transformer-based neural machine translation with context awareness
-- **Vision**: Convolutional Neural Networks (CNNs) with YOLO-based object detection
-- **Speech**: Deep learning speech recognition with accent adaptation algorithms
-- **Price Analysis**: LSTM and ARIMA models for time series forecasting
-- **Negotiation**: Reinforcement learning for strategy optimization
-
-### AI Services Integration
-- Advanced translation APIs with cultural context preservation
-- Computer vision services for real-time vegetable identification
-- Speech-to-text and text-to-speech with multilingual support
-- Market data APIs with machine learning analysis
-- Location services with AI-powered recommendations
-
-## 📱 Mobile-First AI Experience
-
-### Responsive Design
-- **Touch-Optimized Interface**: Mobile-first design with AI-powered interactions
-- **Voice-First Navigation**: Hands-free operation through voice commands
-- **Offline AI Capabilities**: Essential AI functions work without internet connectivity
-- **Progressive Loading**: Optimized AI model loading for mobile networks
-
-### Performance Optimization
-- **Real-Time Processing**: Sub-3-second response times for all AI features
-- **Battery Efficiency**: Optimized AI computations for mobile devices
-- **Network Adaptation**: Intelligent fallbacks for poor connectivity
-- **Cross-Platform Compatibility**: Consistent AI performance across devices
-
-## 🌐 Supported Languages
-
-MandiSaathi's AI Translation Engine supports:
-- **Hindi** (हिन्दी)
-- **Tamil** (தமிழ்)
-- **Telugu** (తెలుగు)
-- **Kannada** (ಕನ್ನಡ)
-- **Malayalam** (മലയാളം)
-- **Marathi** (मराठी)
-- **Gujarati** (ગુજરાતી)
-- **Punjabi** (ਪੰਜਾਬੀ)
-- **Bengali** (বাংলা)
-- **Odia** (ଓଡ଼ିଆ)
-- **English**
-
 ## 🔧 Technical Architecture
 
 ### AI Services Layer
@@ -154,23 +109,7 @@ MandiSaathi's AI Translation Engine supports:
 - Real-time status updates and crowd predictions
 - AI-generated navigation tips and market insights
 
-## 🔒 Privacy & Security
-
-### AI Data Handling
-- **Minimal Data Collection**: Only essential information for AI processing
-- **Local Processing**: Voice and image processing optimized for device-level computation
-- **Secure Transmission**: Encrypted communication with AI services
-- **No Personal Storage**: Conversations and images not permanently stored
-
-### User Privacy
-- **Anonymous Usage**: No personal identification required
-- **Preference Storage**: Language and location preferences stored locally
-- **Opt-in Features**: All AI features require explicit user consent
-- **Data Control**: Users can clear all stored preferences anytime
-
-## 🤝 Contributing
-
-We welcome contributions to enhance MandiSaathi's AI capabilities:
+## Future Scope
 
 ### AI Model Improvements
 - Translation accuracy enhancements
@@ -184,19 +123,9 @@ We welcome contributions to enhance MandiSaathi's AI capabilities:
 - Enhanced negotiation strategies
 - Mobile performance optimizations
 
-## 📄 License
+<img width="1919" height="871" alt="Screenshot 2026-01-30 183446" src="https://github.com/user-attachments/assets/af5b1cc8-bfbf-433a-bb3a-baeb3f09f5ef" />
+<img width="1919" height="860" alt="Screenshot 2026-01-30 183515" src="https://github.com/user-attachments/assets/df13d79e-6670-4f6a-9f82-e8c1359e100d" />
+<img width="338" height="756" alt="Screenshot 2026-01-30 183548" src="https://github.com/user-attachments/assets/95fc6720-73db-46c6-96fa-c5359bcdb50f" />
+<img width="340" height="755" alt="Screenshot 2026-01-30 183628" src="https://github.com/user-attachments/assets/2d8fcec1-1e88-4b49-a35f-b631770ddc6a" />
+<img width="336" height="755" alt="Screenshot 2026-01-30 183647" src="https://github.com/user-attachments/assets/447191d4-774b-4e90-b9a2-c78069fbc263" />
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **AI for Bharat** - Supporting multilingual AI development in India
-- **Local Mandi Communities** - Providing real-world insights and feedback
-- **Open Source AI Community** - Contributing models and frameworks
-- **Agricultural Technology Researchers** - Advancing market intelligence solutions
-
----
-
-**MandiSaathi** - Where AI meets agriculture, and languages unite for local trade.
-
-*Built with ❤️ for India's diverse agricultural markets*
