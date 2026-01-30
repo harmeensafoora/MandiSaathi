@@ -1,181 +1,251 @@
-# Implementation Plan: MandiSaathi
+# Implementation Plan: MandiSaathi - AI-Powered Multilingual Market Assistant
 
 ## Overview
 
-This implementation plan converts the MandiSaathi design into a series of incremental development tasks. The approach focuses on building a voice-first, mobile-first web assistant that breaks linguistic barriers in local Indian trade. Each task builds upon previous work to create a cohesive system for voice translation, price intelligence, mandi discovery, and communication assistance.
+This implementation plan outlines the development of MandiSaathi's AI-powered features including real-time multilingual translation, computer vision-based vegetable recognition, intelligent voice interaction, automated price analysis, and smart negotiation assistance. The plan focuses on integrating advanced AI models and machine learning capabilities to create a seamless multilingual market experience.
 
 ## Tasks
 
-- [ ] 1. Set up project foundation and core infrastructure
-  - Create TypeScript project structure with mobile-first responsive design
-  - Set up build tools, testing framework (Jest + Fast-check for property-based testing), and development environment
-  - Configure API gateway and basic routing
-  - Implement simple authentication system for user preferences
-  - _Requirements: 6.1, 6.2_
+- [ ] 1. Set up AI-powered project foundation and core infrastructure
+  - Create project structure with AI model integration capabilities
+  - Set up development environment with machine learning libraries
+  - Configure API integrations for AI services (translation, speech, vision)
+  - Implement responsive mobile-first interface framework
+  - _Requirements: 8.1, 8.2, 8.5_
 
-- [ ] 2. Implement Voice Translation Service
-  - [ ] 2.1 Create speech recognition and text-to-speech modules
-    - Integrate with Web Speech API for voice input/output
-    - Implement language detection for 10+ Indian languages
-    - Create audio quality assessment and feedback system
-    - _Requirements: 1.1, 1.2_
+- [ ] 2. Implement AI Translation Engine with real-time capabilities
+  - [ ] 2.1 Integrate advanced neural machine translation APIs
+    - Set up connections to translation services with context awareness
+    - Implement language detection and automatic language switching
+    - Add support for 11 Indian languages plus English
+    - _Requirements: 1.1, 1.2, 1.3_
 
-  - [ ]* 2.2 Write property test for voice translation completeness
-    - **Property 1: Voice Translation Completeness**
-    - **Validates: Requirements 1.1, 1.2, 1.3, 1.5**
+  - [ ]* 2.2 Write property test for translation accuracy
+    - **Property 1: Real-Time Translation Accuracy**
+    - **Validates: Requirements 1.2, 1.4, 7.3**
 
-  - [ ] 2.3 Implement translation engine with fallback support
-    - Integrate with translation APIs (Google Translate, Azure Translator)
-    - Create translation caching system for common phrases
-    - Implement confidence scoring and uncertainty indicators
-    - _Requirements: 1.3, 1.5_
+  - [ ] 2.3 Implement conversation context management
+    - Build conversation memory and context preservation
+    - Add cultural nuance adaptation algorithms
+    - Implement real-time conversation flow management
+    - _Requirements: 1.5, 7.1, 7.2_
 
-  - [ ] 2.4 Add conversation context management
-    - Create session-based context tracking
-    - Implement context-aware translation improvements
-    - Add conversation history for better accuracy
-    - _Requirements: 1.4_
+  - [ ]* 2.4 Write unit tests for translation edge cases
+    - Test agricultural terminology translation
+    - Test cultural context preservation
+    - Test conversation continuity across language switches
+    - _Requirements: 1.4, 7.3_
 
-  - [ ]* 2.5 Write property test for conversation context preservation
-    - **Property 2: Conversation Context Preservation**
-    - **Validates: Requirements 1.4**
+- [ ] 3. Develop AI Vision System for vegetable recognition
+  - [ ] 3.1 Integrate computer vision models for vegetable identification
+    - Set up camera access and image capture functionality
+    - Implement real-time object detection and classification
+    - Add confidence scoring and uncertainty handling
+    - _Requirements: 4.1, 4.2, 4.3_
 
-- [ ] 3. Build Local Price Intelligence Service
-  - [ ] 3.1 Create price data collection and storage system
-    - Implement local market data aggregation
-    - Create price calculation algorithms with confidence scoring
-    - Set up data freshness tracking and validation
-    - _Requirements: 2.1, 2.3_
+  - [ ]* 3.2 Write property test for camera identification reliability
+    - **Property 3: Camera Identification Reliability**
+    - **Validates: Requirements 4.2, 4.3, 4.4**
 
-  - [ ] 3.2 Implement price explanation engine
-    - Create factor-based price analysis (quality, season, location)
-    - Implement multilingual explanation generation
-    - Add fallback logic for insufficient data scenarios
-    - _Requirements: 2.2, 2.4, 2.5_
+  - [ ] 3.3 Implement multi-vegetable detection and prioritization
+    - Add support for detecting multiple vegetables in single frame
+    - Implement intelligent prioritization of detected objects
+    - Integrate with price intelligence for immediate pricing
+    - _Requirements: 4.3, 4.4, 4.5_
 
-  - [ ]* 3.3 Write property tests for price intelligence
-    - **Property 3: Local Price Information Completeness**
-    - **Property 4: Price Confidence and Data Quality**
-    - **Validates: Requirements 2.1, 2.2, 2.3, 2.4, 2.5**
+  - [ ]* 3.4 Write unit tests for vision system edge cases
+    - Test poor lighting conditions
+    - Test multiple vegetable scenarios
+    - Test camera permission handling
+    - _Requirements: 4.1, 4.2_
 
-- [ ] 4. Develop Mandi Discovery Service
-  - [ ] 4.1 Implement location-based mandi search
-    - Create mandi database with essential information
-    - Implement GPS-based proximity search
-    - Add mandi status calculation based on time/day
+- [ ] 4. Build AI Voice Assistant with multilingual support
+  - [ ] 4.1 Implement advanced speech recognition system
+    - Set up speech-to-text with Indian language support
+    - Add accent and dialect adaptation capabilities
+    - Implement background noise filtering
+    - _Requirements: 2.1, 2.2, 2.5_
+
+  - [ ]* 4.2 Write property test for voice recognition consistency
+    - **Property 2: Voice Recognition Consistency**
+    - **Validates: Requirements 2.2, 2.5**
+
+  - [ ] 4.3 Develop natural text-to-speech synthesis
+    - Implement high-quality voice synthesis for all supported languages
+    - Add voice profile customization and adaptation
+    - Integrate with translation engine for real-time voice translation
+    - _Requirements: 2.3, 2.4_
+
+  - [ ]* 4.4 Write unit tests for voice assistant features
+    - Test microphone permission handling
+    - Test audio quality optimization
+    - Test voice synthesis quality across languages
+    - _Requirements: 2.1, 2.4_
+
+- [ ] 5. Checkpoint - Ensure core AI features are functional
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [ ] 6. Implement AI Price Intelligence with market analysis
+  - [ ] 6.1 Build real-time price data aggregation system
+    - Set up connections to market data APIs
+    - Implement price trend analysis using time series models
+    - Add location-based price variation analysis
+    - _Requirements: 3.1, 3.2, 3.4_
+
+  - [ ]* 6.2 Write property test for price intelligence accuracy
+    - **Property 4: Price Intelligence Accuracy**
+    - **Validates: Requirements 3.1, 3.3, 3.5**
+
+  - [ ] 6.3 Develop AI-powered market insights and predictions
+    - Implement seasonal pattern recognition
+    - Add demand-supply analysis algorithms
+    - Create AI-generated market timing recommendations
+    - _Requirements: 3.4, 3.5, 6.4_
+
+  - [ ]* 6.4 Write unit tests for price analysis features
+    - Test price trend calculations
+    - Test market data validation
+    - Test offline price data caching
     - _Requirements: 3.1, 3.5_
 
-  - [ ] 4.2 Add mandi information and navigation features
-    - Implement detailed mandi information display
-    - Create simple direction and guidance system
-    - Add specialty and product category information
-    - _Requirements: 3.2, 3.3, 3.4_
+- [ ] 7. Create AI Negotiation Assistant with cultural sensitivity
+  - [ ] 7.1 Implement unfair pricing detection algorithms
+    - Build statistical models for fair price determination
+    - Add real-time price comparison against market data
+    - Implement pricing anomaly detection
+    - _Requirements: 5.1, 5.2_
 
-  - [ ]* 4.3 Write property tests for mandi discovery
-    - **Property 5: Mandi Discovery Accuracy**
-    - **Property 6: Mandi Navigation Assistance**
-    - **Validates: Requirements 3.1, 3.2, 3.3, 3.4, 3.5**
+  - [ ]* 7.2 Write property test for negotiation trigger precision
+    - **Property 5: Negotiation Trigger Precision**
+    - **Validates: Requirements 5.1, 5.2**
 
-- [ ] 5. Create Communication Assistant
-  - [ ] 5.1 Build phrase library and categorization system
-    - Create pre-translated phrase database for market interactions
-    - Implement phrase categorization (greetings, pricing, quality, negotiations)
-    - Add audio generation for phrase playback
-    - _Requirements: 4.1, 4.5_
+  - [ ] 7.3 Develop automated negotiation system
+    - Implement intelligent counter-offer generation
+    - Add cultural adaptation for different regions
+    - Build multi-language negotiation support
+    - _Requirements: 5.3, 5.4, 5.5_
 
-  - [ ] 5.2 Implement contextual assistance and cultural guidance
-    - Create context-aware phrase suggestions
-    - Add cultural tips and etiquette guidance for different regions
-    - Implement emergency phrase quick access
-    - _Requirements: 4.2, 4.3, 4.4_
+  - [ ]* 7.4 Write unit tests for negotiation features
+    - Test negotiation strategy adaptation
+    - Test cultural sensitivity preservation
+    - Test negotiation success tracking
+    - _Requirements: 5.4, 5.5_
 
-  - [ ]* 5.3 Write property tests for communication assistance
-    - **Property 7: Communication Phrase Availability**
-    - **Property 8: Emergency Communication Access**
-    - **Validates: Requirements 4.1, 4.2, 4.3, 4.4, 4.5**
+- [ ] 8. Build real-time mandi information system
+  - [ ] 8.1 Implement location-based mandi discovery
+    - Set up location services integration
+    - Build nearby mandi search with distance calculations
+    - Add real-time mandi status tracking
+    - _Requirements: 6.1, 6.2_
 
-- [ ] 6. Checkpoint - Core functionality integration
-  - Ensure all core services work together seamlessly
-  - Test voice translation with price queries and mandi discovery
-  - Verify mobile interface responsiveness and voice optimization
-  - Ask the user if questions arise
+  - [ ] 8.2 Develop AI-powered mandi insights
+    - Implement peak hours prediction algorithms
+    - Add crowd analysis and optimal timing recommendations
+    - Create AI-generated navigation and timing tips
+    - _Requirements: 6.3, 6.4, 6.5_
 
-- [ ] 7. Implement Mobile-First Interface and Optimization
-  - [ ] 7.1 Create responsive mobile interface
-    - Design mobile-optimized UI components
-    - Implement touch-friendly navigation and voice controls
-    - Add GPS integration for location-based features
-    - _Requirements: 5.1, 5.4, 5.5_
+  - [ ]* 8.3 Write unit tests for mandi information features
+    - Test location accuracy and distance calculations
+    - Test mandi status updates
+    - Test timing recommendations
+    - _Requirements: 6.1, 6.3_
 
-  - [ ] 7.2 Add offline functionality and network resilience
-    - Implement caching for essential information
-    - Create offline mode for basic functions
-    - Add voice processing optimization for noisy environments
-    - _Requirements: 5.2, 5.3_
+- [ ] 9. Implement intelligent conversation management
+  - [ ] 9.1 Build conversation context and history management
+    - Implement conversation state tracking
+    - Add context-aware response generation
+    - Build conversation summarization capabilities
+    - _Requirements: 7.1, 7.4_
 
-  - [ ]* 7.3 Write property tests for mobile functionality
-    - **Property 9: Mobile Interface Optimization**
-    - **Property 10: Offline Functionality**
-    - **Validates: Requirements 5.1, 5.2, 5.3, 5.4, 5.5**
+  - [ ]* 9.2 Write property test for multi-language conversation continuity
+    - **Property 6: Multi-language Conversation Continuity**
+    - **Validates: Requirements 7.1, 7.2, 7.5**
 
-- [ ] 8. Implement User Preference Management
-  - [ ] 8.1 Create simple user preference system
-    - Implement language and location preference storage
-    - Add user type selection (vendor/buyer/both)
-    - Create privacy-focused minimal data collection
-    - _Requirements: 6.1, 6.4, 6.5_
+  - [ ] 9.3 Develop adaptive communication style system
+    - Implement formal/informal style adaptation
+    - Add emotional tone preservation in translations
+    - Build cultural context-aware communication
+    - _Requirements: 7.3, 7.5_
 
-  - [ ] 8.2 Add preference persistence and settings management
-    - Implement cross-session preference memory
-    - Create easy-to-access settings interface
-    - Add preference-based feature customization
-    - _Requirements: 6.2, 6.3_
+  - [ ]* 9.4 Write unit tests for conversation management
+    - Test conversation context preservation
+    - Test style adaptation accuracy
+    - Test multi-participant conversation handling
+    - _Requirements: 7.1, 7.3_
 
-  - [ ]* 8.3 Write property tests for user management
-    - **Property 11: User Preference Persistence**
-    - **Property 12: User Type Adaptation**
-    - **Validates: Requirements 6.1, 6.2, 6.3, 6.4, 6.5**
+- [ ] 10. Optimize mobile performance and AI efficiency
+  - [ ] 10.1 Implement mobile-specific AI optimizations
+    - Optimize AI model loading and caching for mobile
+    - Add progressive loading for AI features
+    - Implement offline capabilities for essential AI functions
+    - _Requirements: 8.2, 8.3, 8.4_
 
-- [ ] 9. Integration and Error Handling
-  - [ ] 9.1 Implement comprehensive error handling
-    - Add graceful degradation for service failures
-    - Create user-friendly error messages in multiple languages
-    - Implement fallback mechanisms for all core services
-    - _Requirements: All requirements (error scenarios)_
+  - [ ]* 10.2 Write property test for mobile performance optimization
+    - **Property 7: Mobile Performance Optimization**
+    - **Validates: Requirements 8.2, 8.5**
 
-  - [ ] 9.2 Add service integration and data flow optimization
-    - Connect all services with proper data flow
-    - Implement caching strategies for performance
-    - Add monitoring and health checks for external APIs
-    - _Requirements: All requirements (integration)_
+  - [ ] 10.3 Add network optimization and fallback systems
+    - Implement graceful degradation for poor network conditions
+    - Add AI model response caching
+    - Build alternative service fallbacks
+    - _Requirements: 8.2, 8.5_
 
-  - [ ]* 9.3 Write integration tests
-    - Test complete user journeys across all services
-    - Verify error handling and fallback scenarios
-    - Test mobile usage patterns and network conditions
+  - [ ]* 10.4 Write unit tests for performance optimizations
+    - Test AI response times under various conditions
+    - Test offline functionality
+    - Test network fallback mechanisms
+    - _Requirements: 8.2, 8.4_
 
-- [ ] 10. Final testing and optimization
-  - [ ] 10.1 Performance optimization and testing
-    - Optimize voice processing for mobile devices
-    - Test and improve response times for all services
-    - Verify offline functionality and caching effectiveness
+- [ ] 11. Implement AI-enhanced user experience features
+  - [ ] 11.1 Build intelligent onboarding and feature discovery
+    - Create AI-powered user guidance system
+    - Add contextual help and suggestions
+    - Implement adaptive interface based on user behavior
+    - _Requirements: 9.1, 9.3_
 
-  - [ ]* 10.2 Comprehensive property-based testing
-    - Run all property tests with increased iteration counts
-    - Verify all correctness properties across edge cases
-    - Test with realistic Indian market data and scenarios
+  - [ ]* 11.2 Write property test for cultural sensitivity preservation
+    - **Property 8: Cultural Sensitivity Preservation**
+    - **Validates: Requirements 5.5, 7.3, 9.5**
 
-- [ ] 11. Final checkpoint - Complete system validation
-  - Ensure all tests pass and system meets requirements
-  - Verify voice-first, mobile-first experience works seamlessly
-  - Test real-world scenarios with multiple languages and locations
-  - Ask the user if questions arise
+  - [ ] 11.3 Develop personalized AI recommendations
+    - Implement user preference learning algorithms
+    - Add location and behavior-based recommendations
+    - Create AI-generated market insights for users
+    - _Requirements: 9.2, 9.4_
+
+  - [ ]* 11.4 Write unit tests for user experience features
+    - Test personalization accuracy
+    - Test cultural appropriateness
+    - Test recommendation relevance
+    - _Requirements: 9.1, 9.4_
+
+- [ ] 12. Integration and comprehensive AI testing
+  - [ ] 12.1 Integrate all AI systems and test end-to-end workflows
+    - Connect all AI components for seamless operation
+    - Test complete user journeys with AI assistance
+    - Validate real-time performance across all features
+    - _Requirements: All requirements integration_
+
+  - [ ]* 12.2 Write comprehensive integration tests
+    - Test AI system interactions
+    - Test real-time performance under load
+    - Test cross-platform AI functionality
+    - _Requirements: 8.5, 9.5_
+
+  - [ ] 12.3 Implement AI model monitoring and optimization
+    - Add AI performance monitoring and analytics
+    - Implement model accuracy tracking
+    - Build continuous improvement mechanisms
+    - _Requirements: 9.3, 9.4_
+
+- [ ] 13. Final checkpoint - Ensure all AI features work seamlessly
+  - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes
 
 - Tasks marked with `*` are optional and can be skipped for faster MVP
 - Each task references specific requirements for traceability
-- Checkpoints ensure incremental validation and user feedback
-- Property tests validate universal correctness properties
-- Focus on voice-first, mobile-first experience throughout development
-- Emphasis on real-world usability in Indian market environments
+- Checkpoints ensure incremental validation of AI functionality
+- Property tests validate universal AI correctness properties
+- Unit tests validate specific AI examples and edge cases
+- Focus on real-time AI performance and mobile optimization throughout development

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en" class="light"> <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MandiSaathi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Outfit', sans-serif; transition: background-color 0.3s, color 0.3s; }
+        
+        /* --- CSS VARIABLES FOR THEMING --- */
+        :root {
+            --bg-body: #f8fafc;
+            --text-main: #1e293b;
+            --glass-bg: rgba(255, 255, 255, 0.98);
+            --glass-border: rgba(226, 232, 240, 0.8);
+            
+            /* Card: Buyer */
+            --buyer-bg: #f8fafc;
+            --buyer-border: #e2e8f0;
+            --buyer-accent: #3b82f6;
+            --buyer-btn-bg: #e2e8f0;
+            --buyer-btn-text: #1d4ed8;
+
+            /* Card: Vendor */
+            --vendor-bg: #fffaf5;
+            --vendor-border: #ffedd5;
+            --vendor-accent: #f97316;
+            --vendor-btn-bg: #ffedd5;
+            --vendor-btn-text: #c2410c;
+
+            /* Text Colors */
+            --text-native: #1e293b;
+            --text-primary: #475569;
+            --text-sec: #94a3b8;
+        }
+
+        /* DARK MODE OVERRIDES */
+        .dark {
+            --bg-body: #0f172a;
+            --text-main: #f1f5f9;
+            --glass-bg: rgba(15, 23, 42, 0.95);
+            --glass-border: rgba(51, 65, 85, 0.8);
+
+            /* Card: Buyer */
+            --buyer-bg: #1e293b;
+            --buyer-border: #334155;
+            --buyer-accent: #60a5fa;
+            --buyer-btn-bg: #334155;
+            --buyer-btn-text: #93c5fd;
+
+            /* Card: Vendor */
+            --vendor-bg: #431407; /* Dark orange/brown */
+            --vendor-border: #7c2d12;
+            --vendor-accent: #fb923c;
+            --vendor-btn-bg: #7c2d12;
+            --vendor-btn-text: #fdba74;
+
+            /* Text Colors */
+            --text-native: #f8fafc;
+            --text-primary: #cbd5e1;
+            --text-sec: #64748b;
+        }
+
+        /* Glass & Utils */
+        .glass-panel { background: var(--glass-bg); backdrop-filter: blur(12px); border-top: 1px solid var(--glass-border); }
+        .mic-active { animation: pulse-ring 1.5s infinite; background-color: #dc2626 !important; }
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+
+        /* Branding */
+        .tricolor-text {
+            background: linear-gradient(180deg, #FF671F 0%, #94a3b8 50%, #046A38 100%); /* Adjusted middle color for dark mode compat */
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.1));
+        }
+
+        /* Message Cards */
+        .message-card {
+            padding: 16px; border-radius: 16px; margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            display: flex; gap: 12px; align-items: flex-start;
+            transition: all 0.3s ease;
+        }
+        
+        .audio-btn {
+            width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; cursor: pointer; flex-shrink: 0;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .audio-btn:active { transform: scale(0.9); }
+
+        /* Using Variables for Cards */
+        .card-vendor { 
+            background-color: var(--vendor-bg); 
+            border: 1px solid var(--vendor-border); 
+            border-left: 4px solid var(--vendor-accent); 
+            flex-direction: row-reverse; 
+        }
+        .card-vendor .audio-btn { background-color: var(--vendor-btn-bg); color: var(--vendor-btn-text); }
+        .card-vendor .msg-content { text-align: left; }
+
+        .card-buyer { 
+            background-color: var(--buyer-bg); 
+            border: 1px solid var(--buyer-border); 
+            border-left: 4px solid var(--buyer-accent); 
+            flex-direction: row; 
+        }
+        .card-buyer .audio-btn { background-color: var(--buyer-btn-bg); color: var(--buyer-btn-text); }
+        .card-buyer .msg-content { text-align: right; width: 100%; }
+
+        .text-native { font-size: 1.125rem; font-weight: 700; color: var(--text-native); line-height: 1.4; margin-bottom: 6px; }
+        .text-trans-primary { font-size: 0.875rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+        .text-trans-sec { font-size: 0.75rem; font-weight: 400; color: var(--text-sec); font-style: italic; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 6px; margin-top: 6px; }
+
+        .msg-enter { animation: slideUp 0.5s ease-out forwards; opacity: 0; transform: translateY(20px); }
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+        
+        /* Dark mode safe select arrow */
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2394A3B8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.7rem top 50%;
+            background-size: 0.65rem auto;
+        }
+
+        /* SCANNER ANIMATION & VIDEO */
+        @keyframes scan-move {
+            0% { top: 5%; opacity: 0.5; }
+            50% { top: 90%; opacity: 1; }
+            100% { top: 5%; opacity: 0.5; }
+        }
+        .scan-line {
+            width: 100%;
+            height: 2px;
+            background: #4ade80; 
+            position: absolute;
+            box-shadow: 0 0 10px #4ade80;
+            animation: scan-move 2s linear infinite;
+            z-index: 20;
+        }
+        #camera-feed {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col md:flex-row md:h-screen md:overflow-hidden bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+
+    <div id="scan-overlay" class="fixed inset-0 z-[100] bg-black/95 hidden flex-col items-center justify-center backdrop-blur-md">
+        <div class="relative w-72 h-72 border-2 border-white/30 rounded-3xl overflow-hidden bg-black shadow-2xl">
+            <video id="camera-feed" autoplay playsinline muted></video>
+            
+            <div class="absolute inset-0 z-20">
+                <div class="absolute top-4 left-4 w-8 h-8 border-t-4 border-l-4 border-green-500 rounded-tl-lg"></div>
+                <div class="absolute top-4 right-4 w-8 h-8 border-t-4 border-r-4 border-green-500 rounded-tr-lg"></div>
+                <div class="absolute bottom-4 left-4 w-8 h-8 border-b-4 border-l-4 border-green-500 rounded-bl-lg"></div>
+                <div class="absolute bottom-4 right-4 w-8 h-8 border-b-4 border-r-4 border-green-500 rounded-br-lg"></div>
+                <div class="scan-line"></div>
+            </div>
+            
+            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-4 z-30">
+                <p class="text-center text-white text-xs font-bold tracking-widest animate-pulse">AI IDENTIFYING...</p>
+            </div>
+        </div>
+        <p class="text-white/80 mt-8 font-medium tracking-wide text-sm">Point camera at vegetable</p>
+        <button onclick="stopScan()" class="mt-6 text-white/50 border border-white/20 px-8 py-3 rounded-full hover:bg-white/10 transition-colors text-xs font-bold uppercase tracking-widest">Cancel</button>
+    </div>
+
+    <aside class="w-full md:w-[400px] bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col z-20 md:h-full md:overflow-y-auto shrink-0 shadow-lg md:shadow-none transition-colors duration-300">
+        <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-start">
+            <div>
+                <h1 class="text-5xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tighter leading-none mb-1">MandiSaathi</h1>
+                <p class="text- md:text-sm font-bold tracking-wide uppercase tricolor-text">Bridging languages <br> Empowering Local Trade</p>
+            </div>
+            <button onclick="toggleTheme()" class="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 hover:scale-110 transition-all">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </div>
+
+        <div class="p-5 space-y-6">
+            <div class="space-y-2">
+                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Select Languages</label>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="relative">
+                        <span class="absolute top-2 left-3 text-[9px] font-bold text-orange-600 dark:text-orange-400 uppercase z-10">Vendor</span>
+                        <select class="w-full bg-orange-50 dark:bg-slate-800 border-2 border-orange-100 dark:border-slate-700 hover:border-orange-200 rounded-xl pt-6 pb-2 pl-3 pr-8 text-sm font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-200 transition-colors cursor-pointer shadow-sm">
+                            <option value="hi" selected>हिन्दी (Hindi)</option>
+                            <option value="mr">मराठी (Marathi)</option>
+                            <option value="gu">ગુજરાતી (Gujarati)</option>
+                            <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+                            <option value="bn">বাংলা (Bengali)</option>
+                            <option value="or">ଓଡ଼ିଆ (Odia)</option>
+                            <option value="as">অসমীয়া (Assamese)</option>
+                            <option value="ur">اردو (Urdu)</option>
+                            <option value="ks">کٲشُر (Kashmiri)</option>
+                            <option value="sd">سنڌي (Sindhi)</option>
+                        </select>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute top-2 left-3 text-[9px] font-bold text-blue-600 dark:text-blue-400 uppercase z-10">You</span>
+                        <select class="w-full bg-blue-50 dark:bg-slate-800 border-2 border-blue-100 dark:border-slate-700 hover:border-blue-200 rounded-xl pt-6 pb-2 pl-3 pr-8 text-sm font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition-colors cursor-pointer shadow-sm">
+                            <option value="ta" selected>தமிழ் (Tamil)</option>
+                            <option value="te">తెలుగు (Telugu)</option>
+                            <option value="kn">ಕನ್ನಡ (Kannada)</option>
+                            <option value="ml">മലയാളം (Malayalam)</option>
+                            <option value="en">English</option>
+                            <option value="kok">कोंकणी (Konkani)</option>
+                            <option value="sa">संस्कृतम् (Sanskrit)</option>
+                            <option value="ne">नेपाली (Nepali)</option>
+                            <option value="hi">हिन्दी (Hindi)</option>
+                            <option value="mr">मराठी (Marathi)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Check Item Rates</label>
+                <div class="relative group mb-2">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">🔍</span>
+                    <input type="text" id="price-search" value="Tomato (Hybrid)" 
+                           class="w-full bg-slate-50 dark:bg-slate-800 border-2 border-blue-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm font-bold rounded-xl focus:ring-2 focus:ring-blue-100 block w-full pl-10 pr-10 p-3 outline-none transition-all placeholder:text-slate-300"
+                           onkeyup="updatePriceDemo(this.value)">
+                    
+                    <button onclick="initCamera()" class="absolute inset-y-0 right-2 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <div class="bg-slate-100 dark:bg-slate-700 p-1.5 rounded-lg hover:bg-blue-100 dark:hover:bg-slate-600 transition-colors border border-slate-200 dark:border-slate-600">
+                            <span class="text-lg leading-none" title="Scan with Camera">📷</span>
+                        </div>
+                    </button>
+                </div>
+                
+                <div id="price-card" class="bg-blue-50/50 dark:bg-slate-800 border border-blue-100 dark:border-slate-700 p-3 rounded-xl flex items-center justify-between shadow-sm transition-all duration-300">
+                    <div>
+                        <div id="price-label" class="text-[10px] font-bold text-slate-400 uppercase tracking-wide mb-0.5">Market Avg: Tomato</div>
+                        <div class="text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-1">
+                            <span id="price-val">₹50</span><span class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">/kg</span>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div id="price-trend" class="text-[10px] font-bold text-red-500 bg-red-50 dark:bg-red-900/30 px-2 py-0.5 rounded-full border border-red-100 dark:border-red-900">▲ +12%</div>
+                        <div class="text-[9px] font-medium text-slate-400 mt-1">vs yesterday</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 rounded-xl p-4 shadow-sm border border-slate-200 dark:border-slate-800">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xl">📍</div>
+                        <div>
+                            <h3 class="text-sm font-bold text-slate-800 dark:text-white">Pune APMC Market</h3>
+                            <p class="text-[10px] text-slate-500">2.4 km away • Gultekdi</p>
+                        </div>
+                    </div>
+                    <span class="text-[9px] font-bold bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-400 px-2 py-1 rounded-full border border-green-200 dark:border-green-900">Open</span>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="bg-slate-50 dark:bg-slate-800 p-2 rounded-lg text-center border border-slate-100 dark:border-slate-700">
+                        <span class="block text-slate-400 text-[9px] uppercase font-bold mb-0.5">Hours</span>
+                        <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200">05:00 - 14:00</span>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-800 p-2 rounded-lg text-center border border-slate-100 dark:border-slate-700">
+                        <span class="block text-slate-400 text-[9px] uppercase font-bold mb-0.5">Peak Rush</span>
+                        <span class="text-[11px] font-bold text-orange-600 dark:text-orange-400">08:00 - 10:30</span>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-800 p-2 rounded-lg text-center border border-slate-100 dark:border-slate-700">
+                        <span class="block text-slate-400 text-[9px] uppercase font-bold mb-0.5">Arrivals</span>
+                        <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">High Vol</span>
+                    </div>
+                </div>
+
+                <button class="w-full py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-[10px] font-bold hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center justify-center gap-1 transition-colors">
+                    Explore nearby mandis ↗
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col bg-slate-50 dark:bg-slate-950 relative md:h-full transition-colors duration-300">
+        <div class="md:hidden bg-white dark:bg-slate-900 p-3 text-center border-b border-slate-100 dark:border-slate-800 sticky top-0 z-10">
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Live Mediation Stream</span>
+        </div>
+
+        <div id="main-scroll" class="flex-1 p-4 md:p-10 pb-32 md:pb-32 md:overflow-y-auto scroll-smooth">
+            <div class="flex justify-center mb-6">
+                <span class="text-[10px] font-bold text-slate-400">Today, 10:42 AM</span>
+            </div>
+
+            <div class="flex flex-col items-end max-w-[90%] md:max-w-[80%] ml-auto">
+                <div class="message-card card-buyer">
+                    <button onclick="playAudio('இன்றைய தக்காளி விலை என்ன?', 'ta')" class="audio-btn">🔊</button>
+                    <div class="msg-content">
+                        <p class="text-native">"இன்றைய தக்காளி விலை என்ன?"</p>
+                        <p class="text-trans-primary">"आज टमाटर का भाव क्या है?"</p>
+                        <p class="text-trans-sec">"What is the price of tomatoes today?"</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-start max-w-[90%] md:max-w-[80%]">
+                <div class="flex items-center gap-2 mb-1 ml-1"><span class="text-[9px] font-bold text-slate-400 uppercase">Vendor</span></div>
+                <div class="message-card card-vendor">
+                    <button onclick="playAudio(document.getElementById('v-quote-orig').innerText, 'hi')" class="audio-btn">🔊</button>
+                    <div class="msg-content">
+                        <p id="v-quote-orig" class="text-native">...</p>
+                        <p id="v-quote-trans" class="text-trans-primary">...</p>
+                        <p id="v-quote-eng" class="text-trans-sec">...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center w-full py-4">
+                <div id="ai-context-layer" class="w-full max-w-lg bg-amber-50 dark:bg-slate-800 border border-amber-200 dark:border-amber-900 rounded-xl p-4 flex gap-4 items-center shadow-sm transition-all duration-500">
+                    <div id="ai-icon" class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center text-xl shrink-0">⚖️</div>
+                    <div class="flex-1">
+                        <div class="flex justify-between items-center mb-1">
+                            <span id="ai-title" class="text-[10px] font-bold text-amber-800 dark:text-amber-400 uppercase tracking-wide">High Price Alert</span>
+                            <span class="text-[9px] bg-white dark:bg-slate-700 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 font-bold">Avg: ₹50</span>
+                        </div>
+                        <p id="ai-desc" class="text-sm text-slate-600 dark:text-slate-300 leading-snug">...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-end max-w-[90%] md:max-w-[80%] ml-auto">
+                <div class="message-card card-buyer">
+                    <button onclick="playAudio(document.getElementById('b-reply-orig').innerText, 'ta')" class="audio-btn">🔊</button>
+                    <div class="msg-content">
+                        <p id="b-reply-orig" class="text-native">...</p>
+                        <p id="b-reply-trans" class="text-trans-primary">...</p>
+                        <p id="b-reply-eng" class="text-trans-sec">...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dynamic-chat-container" class="space-y-6 mt-6"></div>
+        </div>
+
+        <div class="glass-panel fixed md:absolute bottom-0 w-full px-6 py-5 flex items-center justify-between gap-4 z-50">
+            <div class="flex items-center gap-4 flex-1">
+                <div id="mic-btn" onclick="requestMicPermission()" class="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg cursor-pointer transition-colors hover:bg-blue-700">
+                    <span class="text-2xl">🎙️</span>
+                </div>
+                <div class="flex flex-col">
+                    <span id="mic-text" class="text-[10px] font-bold text-slate-800 dark:text-white uppercase tracking-wide">Tap to speak</span>
+                    <span class="text-[10px] text-slate-400 font-medium">बोलें (Hindi) • பேசுங்கள் (Tamil)</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-1 opacity-20 hover:opacity-100 transition-opacity">
+                <button onclick="setScenario('fair')" class="text-[8px] font-bold uppercase text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded">Fair</button>
+                <button onclick="setScenario('unfair')" class="text-[8px] font-bold uppercase text-orange-600 bg-orange-50 dark:bg-orange-900/30 px-2 py-1 rounded">Unfair</button>
+            </div>
+
+            <button id="neg-btn" onclick="runNegotiation()" class="hidden px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-bold rounded-xl shadow-xl items-center gap-2 active:scale-95 transition-all hover:bg-black dark:hover:bg-slate-200">
+                Negotiate For Me
+            </button>
+        </div>
+    </main>
+
+    <script>
+        // --- DARK MODE LOGIC ---
+        function toggleTheme() {
+            const html = document.querySelector('html');
+            const icon = document.getElementById('theme-icon');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.innerText = "🌙";
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                icon.innerText = "☀️";
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Initialize Theme preference
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.querySelector('html').classList.add('dark');
+            document.getElementById('theme-icon').innerText = "☀️";
+        } else {
+            document.querySelector('html').classList.remove('dark');
+            document.getElementById('theme-icon').innerText = "🌙";
+        }
+
+        // --- 1. REAL CAMERA SCANNER ---
+        let videoStream = null;
+
+        async function initCamera() {
+            try {
+                videoStream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: "environment" } 
+                });
+                
+                const overlay = document.getElementById('scan-overlay');
+                const videoEl = document.getElementById('camera-feed');
+                
+                overlay.classList.remove('hidden');
+                overlay.classList.add('flex');
+                
+                videoEl.srcObject = videoStream;
+                
+                setTimeout(() => {
+                    finalizeScan();
+                }, 3500); 
+
+            } catch (err) {
+                alert("Camera permission denied or camera not available.");
+                console.error(err);
+            }
+        }
+
+        function stopScan() {
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+                videoStream = null;
+            }
+            const overlay = document.getElementById('scan-overlay');
+            overlay.classList.add('hidden');
+            overlay.classList.remove('flex');
+        }
+
+        function finalizeScan() {
+            stopScan();
+            const searchInput = document.getElementById('price-search');
+            searchInput.value = "Potato";
+            updatePriceDemo("potato");
+        }
+
+        // --- 2. SEARCH LOGIC ---
+        function updatePriceDemo(val) {
+            const term = val.toLowerCase();
+            const label = document.getElementById('price-label');
+            const price = document.getElementById('price-val');
+            const trend = document.getElementById('price-trend');
+
+            if (term.includes('onion')) {
+                label.innerText = "Market Avg: Onion";
+                price.innerText = "₹35";
+                trend.innerHTML = "▼ -5%";
+                trend.className = "text-[10px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full border border-emerald-100 dark:border-emerald-900";
+            } else if (term.includes('potato')) {
+                label.innerText = "Market Avg: Potato";
+                price.innerText = "₹28";
+                trend.innerHTML = "— Stable";
+                trend.className = "text-[10px] font-bold text-slate-500 bg-slate-50 dark:bg-slate-800 px-2 py-0.5 rounded-full border border-slate-100 dark:border-slate-700";
+            } else {
+                label.innerText = "Market Avg: Tomato";
+                price.innerText = "₹50";
+                trend.innerHTML = "▲ +12%";
+                trend.className = "text-[10px] font-bold text-red-500 bg-red-50 dark:bg-red-900/30 px-2 py-0.5 rounded-full border border-red-100 dark:border-red-900";
+            }
+        }
+
+        // --- 3. MIC PERMISSION FAKE ---
+        let micActive = false;
+        async function requestMicPermission() {
+            if(!micActive) {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    stream.getTracks().forEach(track => track.stop());
+                    
+                    document.getElementById('mic-btn').classList.add('mic-active');
+                    const micText = document.getElementById('mic-text');
+                    micText.innerText = "Listening...";
+                    micText.classList.add('text-red-600');
+                    // In dark mode red might need adjustment but 600 works on slate-900 usually
+                    micActive = true;
+                } catch(e) {
+                    alert("Microphone permission required.");
+                }
+            } else {
+                document.getElementById('mic-btn').classList.remove('mic-active');
+                const micText = document.getElementById('mic-text');
+                micText.innerText = "Tap to speak";
+                micText.classList.remove('text-red-600');
+                micActive = false;
+            }
+        }
+
+        // --- 4. AUDIO ENGINE ---
+        let allVoices = [];
+        function loadVoices() {
+            allVoices = window.speechSynthesis.getVoices();
+        }
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = loadVoices;
+            loadVoices();
+        }
+
+        function playAudio(text, langHint) {
+            const cleanText = text.replace(/['"]/g, "");
+            const isTamil = langHint === 'ta' || /[\u0B80-\u0BFF]/.test(cleanText);
+            const isHindi = langHint === 'hi' || /[\u0900-\u097F]/.test(cleanText);
+
+            if (isTamil) {
+                const audio = new Audio(
+                    `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(cleanText)}&tl=ta&client=gtx`
+                );
+                audio.play().catch(() => {});
+                return;
+            }
+
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(cleanText);
+                utterance.rate = 0.9;
+                utterance.lang = isHindi ? 'hi-IN' : 'en-US';
+
+                let voice = allVoices.find(
+                    v => v.lang === utterance.lang && (v.name.includes('Google') || v.name.includes('Microsoft'))
+                ) || allVoices.find(v => v.lang === utterance.lang);
+
+                if (voice) utterance.voice = voice;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // --- 5. SCENARIO LOGIC ---
+        const scenarios = {
+            fair: {
+                v_orig: "₹50 प्रति किलो। ताज़ा है।", v_trans: "ஒரு கிலோ ₹50. புதியது.", v_eng: "₹50 per kg. It's fresh stock.",
+                b_orig: "சரி, நான் வாங்குகிறேன்.", b_trans: "ठीक है, मैं खरीदता हूँ।", b_eng: "Okay, I'll buy it.",
+                ai_title: "Fair Price ✅", ai_desc: "Quote matches today's market average.",
+                // These classes need to be careful with dark mode logic in JS
+                // We use base classes that are handled by Tailwind dark mode or CSS vars if needed
+                // For simplicity here, we stick to specific colors but might want to update to dark-compatible ones
+                // Using hardcoded classes here for now but improved for visibility
+                ai_bg: "bg-emerald-50 dark:bg-emerald-900/20", ai_border: "border-emerald-200 dark:border-emerald-800", 
+                icon_bg: "bg-emerald-100 dark:bg-emerald-900", title_color: "text-emerald-800 dark:text-emerald-400",
+                showNeg: false
+            },
+            unfair: {
+                v_orig: "₹85 प्रति किलो। एकदम ताज़ा माल है।", v_trans: "ஒரு கிலோ ₹85. மிகவும் புதியது.", v_eng: "₹85 per kg. Very fresh stock.",
+                b_orig: "அது மிகவும் அதிகம்! விலை குறைக்கவும்.", b_trans: "यह बहुत महंगा है! कीमत कम करें।", b_eng: "That's too expensive! Reduce the price.",
+                ai_title: "High Price Alert ⚠️", ai_desc: "Vendor is quoting <strong class='text-slate-900 dark:text-white'>₹35 above</strong> average.",
+                ai_bg: "bg-amber-50 dark:bg-amber-900/20", ai_border: "border-amber-200 dark:border-amber-800", 
+                icon_bg: "bg-amber-100 dark:bg-amber-900", title_color: "text-amber-800 dark:text-amber-400",
+                showNeg: true
+            }
+        };
+
+        function setScenario(type) {
+            const s = scenarios[type];
+            const set = (id, txt) => { document.getElementById(id).innerHTML = txt; };
+            set('v-quote-orig', s.v_orig); set('v-quote-trans', s.v_trans); set('v-quote-eng', s.v_eng);
+            set('b-reply-orig', s.b_orig); set('b-reply-trans', s.b_trans); set('b-reply-eng', s.b_eng);
+
+            const aiLayer = document.getElementById('ai-context-layer');
+            aiLayer.className = `w-full max-w-lg ${s.ai_bg} border ${s.ai_border} rounded-xl p-4 flex gap-4 items-center shadow-sm transition-all duration-500`;
+            document.getElementById('ai-icon').className = `w-10 h-10 rounded-full ${s.icon_bg} flex items-center justify-center text-xl shrink-0 transition-colors`;
+            
+            const title = document.getElementById('ai-title');
+            title.innerText = s.ai_title;
+            title.className = `text-[10px] font-bold ${s.title_color} uppercase tracking-wide transition-colors`;
+            document.getElementById('ai-desc').innerHTML = s.ai_desc;
+
+            const btn = document.getElementById('neg-btn');
+            if (s.showNeg) { btn.classList.remove('hidden'); btn.classList.add('flex'); } 
+            else { btn.classList.add('hidden'); btn.classList.remove('flex'); }
+            
+            document.getElementById('dynamic-chat-container').innerHTML = '';
+            const scrollArea = document.getElementById('main-scroll');
+            if(scrollArea) scrollArea.scrollTo({ top: scrollArea.scrollHeight, behavior: 'smooth' });
+        }
+
+        function runNegotiation() {
+            const btn = document.getElementById('neg-btn');
+            btn.innerHTML = "Negotiating... ⏳";
+            btn.classList.add("opacity-75");
+            btn.disabled = true;
+
+            setTimeout(() => {
+                const container = document.getElementById('dynamic-chat-container');
+                
+                // 1. Buyer Offer
+                container.insertAdjacentHTML('beforeend', `
+                <div class="flex flex-col items-end max-w-[90%] md:max-w-[80%] ml-auto msg-enter">
+                    <div class="message-card card-buyer">
+                        <button onclick="playAudio('சந்தை விலை ₹50. நான் ₹52 தருகிறேன்.', 'ta')" class="audio-btn">🔊</button>
+                        <div class="msg-content">
+                            <p class="text-native">"சந்தை விலை ₹50. நான் ₹52 தருகிறேன்."</p>
+                            <p class="text-trans-primary">"बाजार भाव ₹50 है। मैं ₹52 दूंगा।"</p>
+                            <p class="text-trans-sec">"Market price is ₹50. I offer ₹52."</p>
+                        </div>
+                    </div>
+                </div>`);
+                document.getElementById('main-scroll').scrollTo({ top: 10000, behavior: 'smooth' });
+
+                btn.innerHTML = "Offer Sent: ₹52";
+                btn.className = "px-6 py-3 bg-emerald-100 text-emerald-800 border border-emerald-200 text-sm font-bold rounded-xl shadow-sm flex items-center gap-2";
+
+                // 2. Vendor Accepts
+                setTimeout(() => {
+                    container.insertAdjacentHTML('beforeend', `
+                    <div class="flex flex-col items-start max-w-[90%] md:max-w-[80%] msg-enter">
+                        <div class="flex items-center gap-2 mb-1 ml-1"><span class="text-[9px] font-bold text-slate-400 uppercase">Vendor</span></div>
+                        <div class="message-card card-vendor">
+                            <button onclick="playAudio('ठीक है, ₹52 सही है। ले लो।', 'hi')" class="audio-btn">🔊</button>
+                            <div class="msg-content">
+                                <p class="text-native">"ठीक है, ₹52 सही है। ले लो।"</p>
+                                <p class="text-trans-primary">"சரி, ₹52 பரவாயில்லை. எடுத்துக்கொள்."</p>
+                                <p class="text-trans-sec">"Okay, ₹52 is fine. Take it."</p>
+                            </div>
+                        </div>
+                    </div>`);
+
+                    // 3. AI Success
+                    const aiLayer = document.getElementById('ai-context-layer');
+                    aiLayer.className = `w-full max-w-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl p-4 flex gap-4 items-center shadow-sm transition-all duration-500`;
+                    document.getElementById('ai-icon').innerText = "✅";
+                    document.getElementById('ai-icon').className = "w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center text-xl shrink-0";
+                    document.getElementById('ai-title').innerText = "Fair Deal Reached";
+                    document.getElementById('ai-title').className = "text-[10px] font-bold text-emerald-800 dark:text-emerald-400 uppercase tracking-wide";
+                    document.getElementById('ai-desc').innerHTML = "Vendor accepted ₹52/kg. <br><strong class='text-emerald-700 dark:text-emerald-400'>MandiSaathi helped you save ₹33!</strong>";
+
+                    btn.innerHTML = "Negotiated Successfully 🎉";
+                    document.getElementById('main-scroll').scrollTo({ top: 10000, behavior: 'smooth' });
+
+                }, 1500);
+            }, 1000);
+        }
+
+        setTimeout(() => setScenario('unfair'), 500);
+    </script>
+</body>
+</html>

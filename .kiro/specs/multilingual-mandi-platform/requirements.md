@@ -2,86 +2,127 @@
 
 ## Introduction
 
-MandiSaathi is a voice-first, mobile-first web assistant designed to break linguistic barriers in local Indian trade. The platform serves as a real-time communication bridge that helps vendors and buyers understand each other across languages, discover fair local prices, and find nearby mandis. Rather than being a transactional marketplace, MandiSaathi focuses on being a helpful companion for on-ground market interactions.
+MandiSaathi is an AI-powered multilingual platform designed to bridge language barriers in local Indian agricultural markets (mandis). The system enables seamless communication between buyers and vendors who speak different languages, providing real-time translation, AI-powered price intelligence, camera-based vegetable recognition, voice interaction, and intelligent negotiation assistance to empower local trade.
 
 ## Glossary
 
-- **MandiSaathi**: The voice-first, mobile-first web assistant system
-- **Voice_Bridge**: Real-time voice-to-voice translation system
-- **Price_Helper**: Local price intelligence and explanation system
-- **Mandi_Finder**: Service that locates and provides information about nearby mandis
-- **Communication_Assistant**: Helper for common market phrases and cultural etiquette
+- **MandiSaathi**: The AI-powered multilingual market assistant platform
+- **Mandi**: Traditional Indian agricultural wholesale market
+- **Buyer**: Person purchasing agricultural products in the mandi
+- **Vendor**: Person selling agricultural products in the mandi
+- **AI_Translation_Engine**: Advanced AI system that provides real-time translation between Indian languages
+- **AI_Price_Intelligence**: Machine learning system that provides real-time market pricing and trend analysis
+- **AI_Voice_Assistant**: Advanced speech recognition and synthesis system with multilingual support
+- **AI_Negotiation_Assistant**: Intelligent system that detects unfair pricing and negotiates on behalf of buyers
+- **AI_Vision_System**: Computer vision system for vegetable identification through camera scanning
+- **Real_Time_Translation**: Instantaneous language conversion during live conversations
 
 ## Requirements
 
-### Requirement 1: Voice-First Communication Bridge
+### Requirement 1: AI-Powered Language Selection and Translation
 
-**User Story:** As a vendor or buyer, I want to communicate through voice in my preferred language and have it translated in real-time, so that I can understand and be understood by people speaking different languages.
-
-#### Acceptance Criteria
-
-1. THE Voice_Bridge SHALL support voice input and output in at least 10 major Indian languages including Hindi, English, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, and Punjabi
-2. WHEN a user speaks in their language, THE Voice_Bridge SHALL detect the language automatically and translate to the target language
-3. WHEN translation is provided, THE Voice_Bridge SHALL output natural-sounding speech in the target language
-4. THE Voice_Bridge SHALL maintain conversation context to improve translation accuracy
-5. WHEN translation confidence is low, THE Voice_Bridge SHALL indicate uncertainty and suggest alternative phrasings
-
-### Requirement 2: Local Price Intelligence
-
-**User Story:** As a vendor or buyer, I want to understand fair local prices and the factors affecting them, so that I can make informed decisions about pricing and purchases.
+**User Story:** As a user, I want to select my preferred language and have all communications translated in real-time, so that I can communicate naturally without language barriers.
 
 #### Acceptance Criteria
 
-1. WHEN a user asks about a product price, THE Price_Helper SHALL provide local average prices and reasonable price ranges
-2. THE Price_Helper SHALL explain price variations based on factors like quality, season, location, and market conditions
-3. WHEN displaying price information, THE Price_Helper SHALL indicate confidence levels and data freshness
-4. THE Price_Helper SHALL provide simple explanations in the user's preferred language
-5. WHEN insufficient local data exists, THE Price_Helper SHALL use regional data and clearly indicate the broader scope
+1. WHEN a user selects their preferred language from the dropdown, THE AI_Translation_Engine SHALL set that as their primary communication language
+2. WHEN a conversation begins, THE AI_Translation_Engine SHALL translate all messages between the selected languages in real-time
+3. THE AI_Translation_Engine SHALL support Hindi, Tamil, Telugu, Kannada, Malayalam, Marathi, Gujarati, Punjabi, Bengali, Odia, and English
+4. THE AI_Translation_Engine SHALL display original text, translated text, and English reference simultaneously for clarity
+5. THE AI_Translation_Engine SHALL maintain conversation context and cultural nuances throughout the interaction
 
-### Requirement 3: Nearby Mandi Discovery
+### Requirement 2: Real-Time AI Voice Communication
 
-**User Story:** As a user, I want to find nearby mandis with their basic information, so that I can visit the most suitable markets for my needs.
-
-#### Acceptance Criteria
-
-1. WHEN a user requests nearby mandis, THE Mandi_Finder SHALL show mandis within a reasonable radius based on location
-2. THE Mandi_Finder SHALL display essential information including opening hours, peak times, and current open/closed status
-3. WHEN showing mandi information, THE Mandi_Finder SHALL include specialties and main product categories available
-4. THE Mandi_Finder SHALL provide simple directions or location guidance to selected mandis
-5. THE Mandi_Finder SHALL indicate which mandis are currently active based on time of day and day of week
-
-### Requirement 4: Communication Assistance
-
-**User Story:** As a user, I want help with common market phrases and cultural etiquette, so that I can communicate respectfully and effectively in local markets.
+**User Story:** As a user, I want to speak naturally and have my voice translated instantly, so that I can have fluid conversations without typing.
 
 #### Acceptance Criteria
 
-1. THE Communication_Assistant SHALL provide pre-translated common phrases for typical market interactions
-2. WHEN users need help with specific situations, THE Communication_Assistant SHALL suggest relevant phrases and expressions
-3. THE Communication_Assistant SHALL offer basic cultural tips for respectful communication across different regions
-4. WHEN emergency or urgent communication is needed, THE Communication_Assistant SHALL provide quick access to important phrases
-5. THE Communication_Assistant SHALL organize phrases by categories like greetings, price inquiries, quality questions, and negotiations
+1. WHEN a user taps the voice button, THE AI_Voice_Assistant SHALL activate speech recognition in their selected language
+2. WHEN speech is detected, THE AI_Voice_Assistant SHALL convert speech to text with high accuracy using advanced AI models
+3. THE AI_Voice_Assistant SHALL translate the recognized speech in real-time to the other party's language
+4. THE AI_Voice_Assistant SHALL provide natural text-to-speech synthesis in both languages simultaneously
+5. THE AI_Voice_Assistant SHALL handle multiple Indian language accents and dialects accurately
 
-### Requirement 5: Mobile-First Experience
+### Requirement 3: AI-Powered Vegetable Price Intelligence
 
-**User Story:** As a user, I want to use MandiSaathi easily on my mobile device while moving around markets, so that I can get help whenever and wherever I need it.
-
-#### Acceptance Criteria
-
-1. THE MandiSaathi SHALL provide a mobile-optimized interface that works well on smartphones
-2. WHEN network connectivity is poor, THE MandiSaathi SHALL cache essential information for offline access
-3. THE MandiSaathi SHALL support voice input and output optimized for noisy market environments
-4. WHEN using location-based features, THE MandiSaathi SHALL request and use GPS location efficiently
-5. THE MandiSaathi SHALL provide quick access to most commonly used features through simple navigation
-
-### Requirement 6: Simple User Management
-
-**User Story:** As a user, I want to set my preferences and access personalized assistance, so that MandiSaathi can better help me with my specific needs.
+**User Story:** As a buyer, I want to get real-time vegetable prices through AI analysis, so that I can make informed purchasing decisions.
 
 #### Acceptance Criteria
 
-1. WHEN first using MandiSaathi, THE MandiSaathi SHALL allow users to set their preferred language and basic location
-2. THE MandiSaathi SHALL remember user preferences across sessions without requiring complex registration
-3. WHEN users want to change settings, THE MandiSaathi SHALL provide easy access to language and location preferences
-4. THE MandiSaathi SHALL allow users to identify as vendors, buyers, or both to provide relevant assistance
-5. THE MandiSaathi SHALL protect user privacy by minimizing data collection to essential preferences only
+1. WHEN a buyer types a vegetable name, THE AI_Price_Intelligence SHALL provide current market rates using real-time data analysis
+2. THE AI_Price_Intelligence SHALL display price trends, percentage changes, and market comparisons
+3. THE AI_Price_Intelligence SHALL show location-specific pricing from nearby mandis with distance information
+4. THE AI_Price_Intelligence SHALL provide AI-generated market insights and timing recommendations
+5. THE AI_Price_Intelligence SHALL update pricing data continuously using machine learning algorithms
+
+### Requirement 4: AI Camera-Based Vegetable Recognition
+
+**User Story:** As a buyer, I want to scan vegetables with my camera and get instant AI-powered identification and pricing, so that I can quickly check prices without manual input.
+
+#### Acceptance Criteria
+
+1. WHEN a buyer activates the camera scanner, THE AI_Vision_System SHALL access the device camera with proper permissions
+2. WHEN a vegetable appears in the camera view, THE AI_Vision_System SHALL identify it using advanced computer vision models
+3. THE AI_Vision_System SHALL provide instant vegetable identification with confidence scores
+4. THE AI_Price_Intelligence SHALL immediately display current market prices for the identified vegetable
+5. THE AI_Voice_Assistant SHALL announce the identification and pricing in the user's preferred language
+
+### Requirement 5: AI-Powered Smart Negotiation Assistant
+
+**User Story:** As a buyer, I want AI assistance to detect unfair pricing and negotiate automatically, so that I can get fair deals without confrontation.
+
+#### Acceptance Criteria
+
+1. WHEN a vendor quotes a price, THE AI_Negotiation_Assistant SHALL analyze it against real-time market data
+2. WHEN pricing is significantly above market rates, THE AI_Negotiation_Assistant SHALL detect unfair pricing and alert the buyer
+3. WHEN unfair pricing is detected, THE AI_Negotiation_Assistant SHALL offer to negotiate automatically on behalf of the buyer
+4. THE AI_Negotiation_Assistant SHALL make intelligent counter-offers based on market data and negotiation strategies
+5. THE AI_Negotiation_Assistant SHALL conduct negotiations in both languages simultaneously with cultural sensitivity
+
+### Requirement 6: Real-Time Mandi Information System
+
+**User Story:** As a user, I want to access real-time mandi information powered by AI, so that I can plan my visits effectively.
+
+#### Acceptance Criteria
+
+1. THE AI_Price_Intelligence SHALL display current mandi operating hours and real-time open/closed status
+2. THE AI_Price_Intelligence SHALL show distance calculations and location information for nearby mandis
+3. THE AI_Price_Intelligence SHALL provide AI-analyzed peak hours and crowd predictions
+4. THE AI_Price_Intelligence SHALL display arrival volume indicators and optimal visit timing recommendations
+5. THE AI_Price_Intelligence SHALL offer AI-generated tips for better market navigation and timing
+
+### Requirement 7: Intelligent Conversation Management
+
+**User Story:** As a user, I want the AI to manage conversations intelligently, so that I can have natural, contextual discussions across language barriers.
+
+#### Acceptance Criteria
+
+1. THE AI_Translation_Engine SHALL maintain conversation context and history throughout interactions
+2. THE AI_Translation_Engine SHALL handle complex agricultural terminology and market-specific expressions
+3. THE AI_Translation_Engine SHALL preserve emotional tone and cultural context in translations
+4. THE AI_Translation_Engine SHALL provide conversation summaries and key points when needed
+5. THE AI_Translation_Engine SHALL adapt translation style based on the conversation context (formal/informal)
+
+### Requirement 8: Mobile-First AI Platform
+
+**User Story:** As a user, I want to access all AI features seamlessly on my mobile device, so that I can use the platform effectively in market environments.
+
+#### Acceptance Criteria
+
+1. THE MandiSaathi SHALL provide a fully responsive mobile-first interface optimized for touch interaction
+2. THE MandiSaathi SHALL ensure all AI features work efficiently on mobile networks with optimized data usage
+3. THE MandiSaathi SHALL provide offline capabilities for basic translation and price lookup when connectivity is limited
+4. THE MandiSaathi SHALL optimize camera scanning and voice recognition for mobile device hardware
+5. THE MandiSaathi SHALL maintain consistent AI performance across different mobile devices and operating systems
+
+### Requirement 9: AI-Enhanced User Experience
+
+**User Story:** As a user, I want intelligent assistance and guidance throughout my market experience, so that I can navigate language barriers and market complexities effectively.
+
+#### Acceptance Criteria
+
+1. THE MandiSaathi SHALL provide AI-powered onboarding and feature discovery for new users
+2. THE MandiSaathi SHALL offer contextual help and suggestions based on user behavior and market conditions
+3. THE MandiSaathi SHALL learn from user preferences and adapt the interface and recommendations accordingly
+4. THE MandiSaathi SHALL provide AI-generated market insights and trading tips relevant to the user's location and needs
+5. THE MandiSaathi SHALL ensure all AI interactions are culturally appropriate and respectful of local market customs
